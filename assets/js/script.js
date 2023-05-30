@@ -8,6 +8,7 @@ $( document ).ready(function() {
         dots: true,
         items: 1,
     })
+
     $('#test-slider').owlCarousel({
         loop:true,
         margin:10,
@@ -29,22 +30,20 @@ $( document ).ready(function() {
 
         $cfsubmit.text("Sending...");
 
-
-        $.ajax(
+        $.ajax({
+            url : formURL,
+            type: "POST",
+            data : postData,
+            success:function(data)
             {
-                url : formURL,
-                type: "POST",
-                data : postData,
-                success:function(data)
-                {
-                    $cfResponse.html(data);
-                    $cfsubmit.text(cfsubmitText);
-                },
-                error: function(data)
-                {
-                    alert("Error occurd! Please try again");
-                }
-            });
+                $cfResponse.html(data);
+                $cfsubmit.text(cfsubmitText);
+            },
+            error: function(data)
+            {
+                alert("Error occurd! Please try again");
+            }
+        });
 
         return false;
 
